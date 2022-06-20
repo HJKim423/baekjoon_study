@@ -1,32 +1,27 @@
-const fs = require('fs');
-const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
-let input = fs.readFileSync(filePath).toString().split('\n');
+const inputData = require('fs').readFileSync(__dirname+'/input.txt').toString().trim().split('\n')
+const dataNumber = +inputData[0];
+inputData.shift()
 
-const arrayLength = +input[0];
-const items = input.slice(1);
 
-solution(arrayLength, items);
 
-function solution(arrayLength, items){
-    
+solution();
 
-    for(let i=0; i<arrayLength;i++){
-        let cnt = 0;
-        let ans = 0; //변수가 for문 안에 있어야함!!!!!~!!!!!
-        let item = items[i];
-        for(let k=0; k<item.length;k++){
-            if(item[k] == "O"){
-                
+function solution(){
+    for(let i=0; i<dataNumber; i++){
+        let cnt=0;
+        let answer = 0;
+        let input = inputData[i];
+
+        for(let j=0; j<input.length; j++){
+            if(input[j] === 'O') {
                 cnt++;
-                ans += cnt;
-            }else{
-                cnt=0;
+                answer += cnt;
             }
-            
+            else if(input[j] === 'X'){
+                cnt = 0;
+            }
         }
-
-        console.log(ans);
-        ans = 0;
-
+    
+        console.log(answer);
     }
 }

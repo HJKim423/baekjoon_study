@@ -1,23 +1,20 @@
-const fs = require('fs');
-const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
-let input = fs.readFileSync(filePath).toString().split('\n');
+const inputData = require('fs').readFileSync(__dirname+'/input.txt').toString().trim();
 
-solution(+input[0]);
+solution();
 
-function solution(N) {
-    let res = 0;
-    let ans = 0;
-    let num = N;
+function solution(){
+    let ten = Math.floor(inputData/10);
+    let one = inputData%10;
+    let num = one*10 + (ten+one)%10;
+    let cnt =1;
 
-    while(N !== res || ans===0){
-        let a = Math.floor(num/10);
-        let b = num%10;
-    
-        res = b*10 + (a+b)%10;
-        num=res;
-        ans++;
+
+    while(+inputData !== num){
+        ten = Math.floor(num/10);
+        one = num%10;
+        num = one*10 + (ten+one)%10;
+        cnt++;
+
     }
-
-    console.log(ans);
-
-}
+    console.log(cnt);
+}   
