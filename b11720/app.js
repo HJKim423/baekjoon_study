@@ -1,18 +1,12 @@
-const fs = require('fs');
-const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
-let input = fs.readFileSync(filePath).toString().split('\n');
+const input = require('fs').readFileSync(__dirname+'/input.txt').toString().trim().split('\n')
 
 const arrayLength = +input[0];
-const items = input[1].split('');
+const items = input[1].split('').map(Number);
 
-solution(arrayLength, items);
+solution();
 
-function solution(arrayLength, items){
-    let ans = 0;
+function solution(){
+    let answer = items.reduce((acc,v) => acc+v);
+    console.log(answer);
 
-    for(let i=0 ; i<arrayLength; i++){
-        ans += Number(items[i]);
-    }
-
-    console.log(ans);
 }

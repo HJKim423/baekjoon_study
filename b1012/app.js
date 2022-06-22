@@ -13,7 +13,7 @@ for(let i=0; i<testCase; i++){
         map[Y][X] = 1;
     }
     maps.push(map);
-    data.splice(0, K);// 그 다음 데이터로 넘어감
+    data.splice(0, K);// 그 다음 테스트케이스로 넘어감
 }
 
 
@@ -40,7 +40,7 @@ function solution(arr){
         while(queue.length){
             for(let i=0; i<queue.length; i++){
                 const coords = queue.shift(); //맨 밑에꺼 큐에서 뺌
-                if(!visited[[coords[0], coords[1]]]) continue; //방문했으면 넘어감
+                if(!visited[[coords[0], coords[1]]]) continue; //방문안했으면 넘어감?
                 result.push(coords); //인접한 땅 push
                 for(let j=0; j<4; j++){
                     let nx = coords[0] + dx[j];
