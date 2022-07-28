@@ -1,17 +1,13 @@
 const input = require('fs').readFileSync(__dirname+'/input.txt').toString().trim().split('\n');
 const [N, K] = input.shift().split(" ").map(Number);
-const array = [];
-
-for(let i=0; i<N; i++){
-    array.push(input[i].split(" ").map(Number));
-}
 
 let dp = Array.from({length: N+1}, ()=> Array.from({length: K+1}).fill(0));
 
 for(let i=1; i<=N; i++){
+    let [w, v] = input[i-1].split(" ").map(Number)
     for(let j=1; j<=K; j++){
-        if(array[i][0] <= j){
-            dp[i][j] = Math.max(array[i][1] + dp[i-1][j-array[i][0]], dp[i-1][j]);
+        if(j-w >= 0){
+            dp[i][j] = Math.max(dp[i-1][j], dp[i-1][j-w]+v);
         }
         else {
             dp[i][j] = dp[i-1][j];
