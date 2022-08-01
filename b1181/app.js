@@ -1,25 +1,17 @@
-const input = require('fs').readFileSync(__dirname+'/input.txt').toString().trim().split('\n');
-const arrLen = input.shift();
+const input = require('fs').readFileSync(__dirname+'/input.txt').toString().trim().split('\n').map(v=>v.trim());
+const N = +input.shift();
+
+const set = new Set(input);
+const uniqueArr = [...set];
+
+uniqueArr.sort((a,b)=>{
+    if(a.length !== b.length){
+        return a.length - b.length;
+    }
+    if(a<b){
+        return -1;
+    }
+});
 
 
-
-solution();
-
-function solution(){
-    
-    input.sort((a,b) =>{
-        if (a.length > b.length) return 1;
-        if (a.length < b.length) return -1;
-        if (a > b) return 1;
-        if (a < b) return -1;
-        return 0;
-    
-    });
-
-    const set = new Set(input);
-    const answer = [...set];
-    
-    answer.map(v=> console.log(v));
-
-}
-
+uniqueArr.map(v=>console.log(v));

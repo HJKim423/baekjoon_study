@@ -2,20 +2,24 @@ const input = require('fs').readFileSync(__dirname+'/input.txt').toString().trim
 const [N, K] = input[0].split(" ").map(Number);
 const arrK = input[1].split(" ").map(Number);
 
-let answer =0;
-let num = N.toString().split("");
-let cnt = 0;
-
-dfs(0);
-function dfs(cnt){
-    if(cnt > N) return;
-
-    answer = Math.max(cnt, answer);
-    for(let i=0; i<K;i++){
-        dfs(cnt * 10 + arrK[i]);
+let answer = N;
+while(answer > 0){
+    
+    let ansArr = answer.toString().split('').map(Number);
+    let cnt=0;
+    ansArr.map(v=> {
+        if(arrK.indexOf(v) !== -1){
+            cnt++;
+        }
+    });
+    if(cnt === ansArr.length){
+        console.log(answer);
+        break;
+    }else{
+        answer--;
+        continue;
     }
 }
-console.log(answer);
 
 // while(true){
 //     let numArr = num.toString().split("");

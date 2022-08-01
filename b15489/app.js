@@ -3,7 +3,7 @@ const [R, C, W] = require('fs').readFileSync(__dirname+'/input.txt').toString().
 let dp = Array.from(Array(30), (v, i)=> Array.from({length: i}).fill(1));
 let answer = 0;
 console.log(dp);
-for(let i=2; i<=dp.length; i++){
+for(let i=2; i<dp.length; i++){
     for(let j=1; j<i; j++){
         if(j !== 0 && j !== i-1){
             dp[i][j] = dp[i-1][j-1] + dp[i-1][j];

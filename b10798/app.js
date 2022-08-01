@@ -1,21 +1,23 @@
-const input = require('fs').readFileSync(__dirname+'/input.txt').toString().trim().split('\n')
+const input = require('fs').readFileSync(__dirname+'/input.txt').toString().trim().split('\n').map(v=>v.trim());
+let maxLng = 0;
+let answer = '';
 
-solution();
+input.map((v,i)=>{
+    if(v.length > maxLng){
+        maxLng = v.length;
+    }
+})
 
-
-function solution(){
-    let answer ='';
-    for(let i=0; i<Math.max(...input.map(i=> i.length)); i++){
-        for(let j=0; j<input.length; j++){
-            if(input[j][i] === undefined  || input[j][i] === '\r') {
-                continue;
-            }
-            else{
-                answer += input[j][i];
-            }
+for(let i=0; i<maxLng; i++){
+    for(let j=0; j<input.length; j++){
+        if(input[j][i] === '' || input[j][i] === undefined){
+            answer += '';
+        }else{
+            answer += input[j][i];
         }
+        
 
     }
+}
 
-    console.log(answer);
-} 
+console.log(answer);

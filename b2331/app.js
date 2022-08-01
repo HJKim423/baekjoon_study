@@ -1,19 +1,22 @@
 const [A, P] = require('fs').readFileSync(__dirname+'/input.txt').toString().trim().split(' ');
 
-let arr = [+A];
-let i=0;
+let D=[+A];
+let a = A;
 
 while(true){
-    let num = arr[i].toString().split('');
-    let sum =0;
-    for(let k=0; k<num.length; k++){
-        sum += Math.pow(num[k], P);
+    let Aarr = a.toString().split('').map(Number);
+    let newA = 0;
+    for(let i=0; i<Aarr.length; i++){
+        newA += Math.pow(Aarr[i], P);
     }
-    if(arr.includes(sum)){
-        console.log(arr.indexOf(sum));
-        break;
-    }
-    arr.push(sum);
-    i++;
-}
 
+
+    if(D.includes(newA)){
+        console.log(D.indexOf(newA));
+        break;
+    }else{
+        D.push(newA);
+        a = newA;
+        continue;
+    }
+}

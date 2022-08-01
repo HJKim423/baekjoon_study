@@ -1,13 +1,15 @@
 const input = require('fs').readFileSync(__dirname+'/input.txt').toString().trim();
-let answer = 5000;
+let N = +input;
+let cnt = 0;
 
-for(let i=0; i*5<= input; i++){
-    for(let j=0; j*3 <= input; j++){
-        if(+(i*5+j*3) === +input){
-            if( Number(i+j) < answer) answer = i+j;
-        }
-        
+while(N > 0){
+    if(N % 5 === 0){
+        N -= 5;
+        cnt++;
+    }else{
+        N -= 3;
+        cnt++;
     }
 }
-if(answer === 5000) answer = -1;
-console.log(answer);
+if(N < 0) cnt = -1;
+console.log(cnt);
