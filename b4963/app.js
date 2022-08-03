@@ -1,53 +1,62 @@
 const input = require('fs').readFileSync(__dirname+'/input.txt').toString().trim().split('\n');
 
-const offsetX = [-1, 0, 1, -1, 1, -1, 0, 1];
-const offsetY = [-1, -1, -1, 0, 0, 1, 1, 1];
-let graph;
+const dx = [-1,0,1,-1,1,-1,0,1];
+const dy = [-1,-1,-1,0,0,1,1,1];
+
+let queue = [];
+
 let w,h;
 
-while(true){
+function bfs(board){
     let cnt = 0;
-    [w,h] = input.shift().split(" ");
-    if(w === '0' && h === '0'){
-        break;
-    }
-    graph = [];
     for(let i=0; i<h; i++){
-        graph.push(input.shift().split(' '))
-    }
-    
-    for(let y=0; y<h; y++){
-        for(let x=0; x<w; x++){
-            if(graph[y][x] === '1'){
-                cnt += 1;
-                bfs(y, x);
-            }
-        }
-    }
-    console.log(cnt);
-}
-
-
-function bfs(y,x){
-    let queue = [];
-    queue.push([y, x]);
-    while(queue.length >0){
-        const [ay, ax] = queue.shift();
-
-        for(let i=0; i<8; i++){
-            const dy = ay + offsetY[i];
-            const dx = ax + offsetX[i];
-
-            if(0 <= dy && dy < h && 0 <= dx && dx < w){
-                if(graph[dy][dx] === '1'){
-                    queue.push([dy, dx]);
-                    graph[dy][dx] = '0';
+        for(let j=0; j<w; j++){
+            if(board[i][j]===1){
+                board[i][j] = 0;
+                queue.push([i,j]);
+                cnt++;
+                while(queue.length!==0){
+                    let [y,x] = queue.shift();
+                    for(let k=0; k<8; k++){
+                        let nx = x + dx[k];
+                        let ny = y + dy[k];
+                        if(nx>=0 && nx<w && ny>=0 && ny<h && board[ny][nx] === 1){
+                            board[ny][nx] = 0;
+                            queue.push([ny,nx]);
+                            
+                        }
+                    }
+                    
                 }
+                
             }
         }
     }
-    
+    return cnt;
 }
+
+while(true){
+    [w, h] = input.shift().split(' ').map(Number);
+    if(w===0 && h===0) break;
+
+    let board = [];
+    for(let i=0; i<h; i++){
+        board.push(input.shift().split(' ').map(Number));
+    }
+    console.log(bfs(board));
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
 // const input = require('fs').readFileSync(__dirname+'/example.txt').toString().trim().split('\n')
 

@@ -1,3 +1,4 @@
+
 const input = require('fs').readFileSync(__dirname+'/input.txt').toString().trim().split('\n');
 const N = +input.shift();
 const arr = input.map(Number);
@@ -12,3 +13,4 @@ for(let i=3; i<=N; i++){
 }
 
 console.log(dp[N]);
+
