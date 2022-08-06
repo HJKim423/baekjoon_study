@@ -1,17 +1,17 @@
 const input = require('fs').readFileSync(__dirname+'/input.txt').toString().trim();
-let answer = 0;
-const N = parseInt(input);
-solution();
-function solution(){
-    for(let i=1; i<= N; i++){
-        let nums = String(i).split('');
-        let sum = nums.reduce((acc,v) => +acc + +v);
-        console.log(i + sum);
-        if( (i + sum) === N){
-            answer = i;
-            break;
-        }
+const n = +input;
 
+let answer = 0;
+let num = 0;
+
+while(num < n){
+    let nums = num.toString().split('').map(Number);
+    let sum = nums.reduce((acc, v) => acc+v) + num;
+    if(sum === n){
+        answer = num;
+        break;
     }
-    console.log(answer);
+    num++;
 }
+
+console.log(answer);
