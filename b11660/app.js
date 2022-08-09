@@ -15,19 +15,15 @@ for(let i=1; i<=n; i++){
         sum[i][j] = sum[i-1][j]+ sum[i][j-1] - sum[i-1][j-1] + board[i-1][j-1];
     }
 }
-
+console.log(sum);
 for(let i=n+1; i<=n+m; i++){
     let x1 = +input[i][0];
     let y1 = +input[i][2];
     let x2 = +input[i][4];
     let y2 = +input[i][6];
     answer += sum[x2][y2] - sum[x2][y1-1] - sum[x1-1][y2] + sum[x1-1][y1-1];
-    if(i < n+m){
-        answer += "\n";
-    }
+    answer += "\n";
     
-
-
 }
 
 console.log(answer);

@@ -3,30 +3,33 @@ const [N,M] = input[0].split(' ').map(Number);
 const A = input[1].trim().split(' ').map(Number).sort((a,b)=>a-b);
 const B = input[2].trim().split(' ').map(Number).sort((a,b)=>a-b);
 
-let answer = [];
-let i = 0;
-let j=0;
+let result = [];
+let a = 0;
+let b = 0;
 
-while(answer.length < (N+M)){
-    if(A[i] > B[j]){
-        if(j>=M){
-            answer.push(A[i]);
+while(result.length < N+M){
+    if(A[a] > B[b]){
+        if(b>M-1){
+            result.push(A[a]);
+            a++;
         }
         else{
-            answer.push(B[j]);
-            j++;
+            result.push(B[b]);
+            b++;
         }
         
-    }else{
-        if(i>=N){
-            answer.push(B[j]);
+    }
+    else{
+        if(a>N-1){
+            result.push(B[b]);
+            b++;
         }
         else{
-            answer.push(A[i]);
-            i++;
+            result.push(A[a]);
+            a++;
         }
         
     }
 }
 
-console.log(answer.join(' '));
+console.log(result.join(" "));
