@@ -1,19 +1,15 @@
 const [N, K] = require('fs').readFileSync(__dirname+'/input.txt').toString().trim().split(' ').map(Number);
 
-solution();
+let cnt = 0;
 
-function solution(){
-    let answer = 0;
+for(let i=0; i<=N; i++){
+    for(let j=0; j<=59; j++){
+        for(let k=0; k<=59; k++){
+            let time = i.toString().padStart(2,'0') + j.toString().padStart(2, '0') + k.toString().padStart(2, '0');
+            if(time.includes(K)) cnt++;
 
-    for(let i=0; i<=N; i++){ //시
-        for(let j=0; j<=59; j++){ //분
-            for(let k=0; k<=59; k++){ //초
-            
-                let time = String(i).padStart(2, '0') + String(j).padStart(2, '0') + String(k).padStart(2, '0');
-                if(time.includes(K)) answer++;
-            }
         }
-
     }
-    console.log(answer);
 }
+
+console.log(cnt);
