@@ -8,7 +8,13 @@ let i = 0;
 arr[0]++; // 일단 1번 자리에 앉은 사람이 공을 받는다.
 
 while(!arr.includes(m)){
-    i += l;
+    if(arr[i] % 2 === 0){
+        i += l;
+    }
+    else{
+        i -= l;
+    }
+    
     arr[i%n]++;
     cnt++;
 }
