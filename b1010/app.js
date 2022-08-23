@@ -1,30 +1,27 @@
-const input = require('fs').readFileSync(__dirname+'/input.txt').toString().trim().split('\n');
-const TestCase = +input.shift();
-let N,M;
+const input = require('fs').readFileSync(__dirname + '/input.txt').toString().trim().split("\n");
+const T = +input.shift();
 
-
-for(let i=0; i<TestCase; i++){
-    [N,M] = input[i].split(' ').map(Number);
+for(let i=0; i<T; i++){
+    [a,b] = input[i].split(' ').map(Number);
     let dp = Array.from(Array(30), ()=> Array(30).fill(0));
 
-    for(let n=1; n<=N; n++){
-        for(let m=n; m<=M; m++){
-            if(n===1){
-                dp[n][m] = m;
+    for(let i=1; i<=a; i++){
+        for(let j=b; j<=b; j++){
+            if(i===1){
+                dp[i][j] = j;
             }
-            else if(n === m){
-                dp[n][m] = 1;
+            else if(i === j){
+                dp[i][j] = 1;
             }
             else{
-                for(let k=1; k<m; k++){
-                    dp[n][m] += dp[n-1][k];
+                for(let k=1; k<j; k++){
+                    dp[i][j] += dp[i-1][j];
                 }
 
             }
             
         }
     }
-    console.log(dp[N][M]);
+    console.log(dp[a][b]);
 
 }
-

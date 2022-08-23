@@ -1,26 +1,10 @@
-const fs = require('fs');
-const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
-let input = fs.readFileSync(filePath).toString().split('\n');
-
+const input = require('fs').readFileSync(__dirname + '/input.txt').toString().trim().split("\n");
 const n = +input[0];
-const items = input[1].split(' ').map((item) => +item);
+let score = input[1].split(" ").map(Number);
+const m = Math.max(...score);
 
-solution(n, items);
+let new_score = score.map(v=>{
+    return v/m*100;
+})
 
-function solution(n, items){
-    let max = items[0];
-    let ans = 0;
-    let hap = 0;
-
-    for(let i=0;i<items.length;i++){
-        if(max<items[i]){
-            max = items[i];
-        }
-    }
-    for(let i=0;i<items.length;i++){
-        hap += items[i]/max*100;
-    }
-    ans = hap/n;
-    
-    console.log(ans);
-}
+console.log(new_score.reduce((acc,v)=>acc+v)/n);
