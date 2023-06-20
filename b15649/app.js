@@ -1,34 +1,27 @@
-const [N, M] = require('fs').readFileSync(__dirname+'/input.txt').toString().trim().split(' ').map(Number);
+const [N, M] = require("fs")
+  .readFileSync(__dirname + "/input.txt")
+  .toString()
+  .trim()
+  .split(" ")
+  .map(Number);
 
-let visited = new Array(N+1).fill(0);
+let visited = Array.from({ length: N + 1 }, () => 0);
 let result = [];
-let answer = '';
 
-function dfs(v){
-    if(result.length === M){
-        answer += result.join(' ');
-        answer += "\n";
-        return;
-        
-        
+const dfs = L => {
+  if (L === M) {
+    console.log(result.join(" "));
+  } else {
+    for (let i = 1; i <= N; i++) {
+      if (visited[i] === 0) {
+        visited[i] = 1;
+        result.push(i);
+        dfs(L + 1);
+        result.pop();
+        visited[i] = 0;
+      }
     }
-    for(let i=0; i<N; i++){
-        if(visited[i]===1) continue;
-        else{
-            visited[i] = 1;
-            result.push(i+1);
-            dfs(v+1);
-            result.pop();
-            visited[i] = 0;
-        }
-        
-        
-    }
-}
+  }
+};
 
-dfs(1);
-console.log(answer.trim());
-
-// for(let i=0; i<result.length; i++){
-//     console.log(result[i]);
-// }
+dfs(0);
