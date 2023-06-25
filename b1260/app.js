@@ -1,53 +1,59 @@
-const input = require('fs').readFileSync(__dirname + '/input.txt').toString().trim().split("\n");
+const input = require("fs")
+  .readFileSync(__dirname + "/input.txt")
+  .toString()
+  .trim()
+  .split("\n");
 const [n, m, v] = input.shift().split(" ").map(Number);
 
-let graph = Array.from({length:n+1}, () => Array(n+1).fill(0));
-let visitedD = Array(n+1).fill(0);
-let visitedB = Array(n+1).fill(0);
+let arr = Array.from({ length: n + 1 }, () =>
+  Array.from({ length: n + 1 }).fill(0)
+);
 
-let answerD = [];
-let answerB = [];
-
-for(let i=0; i<m; i++){
-    let [a,b] = input[i].split(" ").map(Number);
-    graph[a][b] = 1;
-    graph[b][a] = 1;
+for (let i = 0; i < m; i++) {
+  const [a, b] = input[i].split(" ").map(Number);
+  arr[a][b] = 1;
+  arr[b][a] = 1;
 }
 
-visitedD[v] = 1;
-answerD.push(v);
+let visited = Array.from({ length: n + 1 }, () => 0);
+let answer = [];
 
-
-const dfs = (v) => {
-    for(let i=1; i<=n; i++){
-        if(graph[v][i] === 1 && visitedD[i] === 0){
-            visitedD[i] = 1;
-            answerD.push(i);
-            dfs(i);
-        }
+const dfs = v => {
+  if (answer.length === n) {
+    console.log(answer.join(" "), "!!");
+  }
+  for (let i = 1; i <= n; i++) {
+    if (arr[v][i] === 1 && visited[i] === 0) {
+      visited[i] = 1;
+      answer.push(i);
+      dfs(i);
     }
+  }
+};
 
-}
+visited[v] = 1;
+answer.push(v);
 dfs(v);
-console.log(answerD.join(" "));
 
+let visitedB = Array.from({ length: n + 1 }, () => 0);
+let answerB = [];
+let queue = [];
+const bfs = v => {
+  queue.push(v);
+  visitedB[v] = 1;
+  answerB.push(v);
+  while (queue.length) {
+    let val = queue.shift();
 
-const bfs = (v) => {
-    let queue = [];
-    queue.push(v);
-    answerB.push(v);
-    visitedB[v] = 1;
-    while(queue.length){
-        let x = queue.shift();
-
-        for(let i=1; i<=n; i++){
-            if(graph[x][i] === 1 && visitedB[i] === 0){
-                queue.push(i);
-                visitedB[i] = 1;
-                answerB.push(i);
-            }
-        }
+    for (let i = 1; i <= n; i++) {
+      if (arr[val][i] === 1 && visitedB[i] === 0) {
+        visitedB[i] = 1;
+        answerB.push(i);
+        queue.push(i);
+      }
     }
-}
+  }
+};
+
 bfs(v);
-console.log(answerB.join(" "));
+console.log(answerB.join(" "), "??");
