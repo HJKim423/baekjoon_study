@@ -12,7 +12,7 @@ const dfs = (L, arr, visited, k) => {
   } else {
     for (let i = L; i < k; i++) {
       if (visited[i] === 0) {
-        if (L >= 1 && result.at(-1) > arr[i]) continue;
+        // if (L >= 1 && result.at(-1) > arr[i]) continue;
         visited[i] = 1;
         result.push(arr[i]);
         dfs(L + 1, arr, visited, k);
