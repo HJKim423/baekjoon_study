@@ -1,6 +1,7 @@
 function solution(elements) {
   var answer = 0;
   let extendElem = [...elements, ...elements];
+  const len = elements.length;
   let result = [];
 
   for (let j = 0; j < extendElem.length; j++) {
